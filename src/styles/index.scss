@@ -1,5 +1,7 @@
 @use 'reset';
-@use 'vars';
+@use 'vars' as v;
+@use 'fonts';
+
 
 body {
   font-family: sans-serif;

@@ -1,24 +1,27 @@
 @use 'sass:color';
 @use 'sass:math';
 
-// Couleur principale
+// -- Couleur principale
 $color: #2c3e50;
 $color-dark: color.scale($color, $lightness: -50%);
 $color-light: color.scale($color, $lightness: 70%);
 
-// Couleur de palette de l'affiche d'ATLA
+// -- Couleur de palette de l'affiche d'ATLA
 $color-light-sea: #156498;
 $color-khaki: #E7D775;
 $color-dark-khaki: #C0A377;
 $color-saddle-brown: #6B281A;
 
-// Couleur fond de l'application
+// -- Couleur fond de l'application
 $color-bg: #D4D7D2;
 
-// Couleur NOIR et BLANC
+// -- Couleur NOIR et BLANC
 $color-black: #333;
 $color-white: #fff;
 
-// Gouttières
+// -- Gouttières
 $gutter: 1.5rem;
 $halfGutter: math.div($gutter, 2);
+
+// -- Police d'ATLA
+$font-atla: 'Herculanum', sans-serif;

@@ -1,0 +1,28 @@
+@use '../../../styles/vars' as v;
+
+.Menu {
+  &-list {
+    list-style: none;
+    text-align: center;
+    font-family: v.$font-atla;
+    font-size: 1.5rem;
+    color: v.$color-dark-khaki;
+  }
+
+  &-link {
+    display: inline-block;
+    padding: v.$halfGutter;
+    // width: 25%; Assez cool, mais il n'y a pas de côté responsive >>> utilisation du margin à la place
+    margin-right: 4rem;
+
+    & a {
+      text-decoration: none;
+      color: inherit;
+
+      &:hover {
+        color: v.$color-saddle-brown;
+        transition: all .5s ease-in-out;
+      }
+    }
+  }
+}
