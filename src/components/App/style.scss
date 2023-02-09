@@ -1,0 +1,13 @@
+@use '../../styles/vars' as v;
+
+body {
+  background-color: v.$color-bg;
+}
+
+.app {
+  margin: 0 auto;
+  max-width: 80vw;
+  min-height: 100vh;
+  padding: 1rem;
+  width: 90%;
+}
