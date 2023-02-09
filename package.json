@@ -51,6 +51,7 @@
   "dependencies": {
     "prop-types": "*",
     "react": "*",
-    "react-dom": "*"
+    "react-dom": "*",
+    "react-icomoon": "^2.5.7"
   }
 }
