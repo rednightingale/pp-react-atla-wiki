@@ -14,6 +14,9 @@ function Searchbar() {
           placeholder="Search"
           aria-label="Search"
         />
+        <span className="Searchbar-form-input-focus-border">
+          <i className="Searchbar-form-input-focus-border-i" />
+        </span>
         <button className="Searchbar-form-button" type="submit">
           <Icon icon="search" size="2rem" />
         </button>
