@@ -3,4 +3,14 @@
   font-family: 'Herculanum';
   font-style: normal;
   font-weight: 400;
+
+  src: local("Heebo"), url('../assets/fonts/Heebo-Regular.ttf') format('truetype');
+  font-family: 'Heebo';
+  font-style: normal;
+  font-weight: 400;
+
+  src: local("CourierPrime"), url('../assets/fonts/CourierPrime-Regular.ttf') format('truetype');
+  font-family: 'CourierPrime';
+  font-style: normal;
+  font-weight: 400;
 }

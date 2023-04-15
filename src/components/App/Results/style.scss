@@ -1,0 +1,197 @@
+@use '../../../styles/vars' as v;
+
+.Results {
+  display: inline-flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  margin: 1rem auto;
+  padding: 1rem;
+  width: 100%;
+  max-width: 90vw;
+  min-height: 100vh;
+}
+
+.ResultsItem {
+  margin: 1.5rem;
+  width: 100%;
+  max-width: 19rem;
+  height: 28rem;
+
+  &-flip-card {
+    background-color: transparent;
+    width: 100%;
+    max-width: 19rem;
+    height: 28rem;
+    perspective: 1000px;
+    /* Remove this if you don't want the 3D effect */
+
+    &:hover>&-inner {
+      transform: rotateY(180deg);
+    }
+
+    /* The div inner is needed to position the front and back side */
+    &-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 1s ease-in-out;
+      transform-style: preserve-3d;
+    }
+
+    // Propriétés semblables pour ma carte FRONT et BACK
+    &-front,
+    &-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: 1px solid v.$color-white;
+      border-radius: 2rem;
+      -webkit-backface-visibility: hidden;
+      /* Safari */
+      backface-visibility: hidden;
+
+      &-image {
+        &-container {
+
+          // Sert à construire une bordure qui ne fait pas la taille du parent
+          &:before {
+            content: "";
+            position: absolute;
+            left: 1rem;
+            bottom: 13.5rem;
+            width: 90%;
+            border-bottom: 1.5px solid v.$color-air;
+          }
+        }
+
+        &-avatar {
+          width: 100%;
+          max-width: 12.5rem;
+          height: auto;
+          margin: 0 auto;
+        }
+
+        &-logo {
+          width: 100%;
+          max-width: 3rem;
+          height: auto;
+          position: absolute;
+          right: .7rem;
+          top: .7rem;
+
+          &-color::before {
+            content: "";
+            display: inline-block;
+            position: absolute;
+            width: 6.7rem;
+            height: 6.7rem;
+            border-radius: 0 2rem 0 0;
+            background-color: v.$color-air;
+            clip-path: polygon(100% 0%, 100% 100%, 0% 0%);
+            -webkit-clip-path: polygon(100% 0%, 100% 100%, 0% 0%);
+            top: 0;
+            right: 0;
+          }
+        }
+      }
+    }
+
+    // Propriétés individuelles pour ma carte FRONT
+    &-front {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      background-color: v.$color-card-bg;
+      color: v.$color-black;
+
+      &-header {
+        margin: 2rem 1rem;
+        display: flex;
+        flex-direction: column;
+
+        &-container {
+          display: flex;
+          // Pour que mon container prenne la totalité de la carte
+          flex-grow: 1;
+        }
+
+        &-name,
+        &-nationality,
+        &-position {
+          flex-grow: 1;
+          padding: .3rem;
+        }
+
+        &-name {
+          font-family: v.$font-atla;
+          font-size: 1.75rem;
+        }
+
+        &-nationality {
+          font-family: v.$font-atla;
+          font-size: 1.25rem;
+        }
+
+        &-position {
+          font-family: v.$font-label;
+          font-size: 0.75rem;
+          font-weight: 500;
+          letter-spacing: 0.025rem;
+          text-transform: uppercase;
+          color: v.$color-air;
+          background-color: v.$color-card-bg;
+          border-radius: 1.25rem;
+          -webkit-border-radius: 1.25rem;
+          -moz-border-radius: 1.25rem;
+          padding: 0.35rem 0.75rem;
+          border-style: solid;
+          border-width: 0.125rem;
+          border-color: v.$color-air;
+          margin: .3rem;
+          -webkit-box-shadow: none;
+          -moz-box-shadow: none;
+          -box-shadow: none;
+        }
+      }
+    }
+
+    // Propriétés individuelles pour ma carte BACK
+    &-back {
+      display: flex;
+      flex-direction: column;
+      transform: rotateY(180deg);
+      background-color: v.$color-card-bg;
+      color: v.$color-black;
+
+      &-info {
+        display: flex;
+        flex-direction: column;
+        margin: 2rem 1rem 1rem;
+        width: 90%;
+        height: 50%;
+        // Pour adapter automatiquement la taille de mon texte à ma div
+        font-size: 2vh;
+        flex-grow: 1;
+
+        &-title {
+          font-family: v.$font-title;
+          text-align: start;
+          flex-grow: 1;
+
+          &:first-child {
+            padding-top: .6rem;
+          }
+        }
+
+        &-firstAppearance,
+        &-lastAppearance,
+        &-voicedBy {
+          font-family: v.$font-atla;
+          padding: .3rem 0;
+          text-align: start;
+          flex-grow: 1;
+        }
+      }
+    }
+  }
+}

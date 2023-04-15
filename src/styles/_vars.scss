@@ -1,6 +1,7 @@
 @use 'sass:color';
 @use 'sass:math';
 
+// COULEURS
 // -- Couleur principale
 $color: #2c3e50;
 $color-dark: color.scale($color, $lightness: -50%);
@@ -12,16 +13,30 @@ $color-khaki: #E7D775;
 $color-dark-khaki: #C0A377;
 $color-saddle-brown: #6B281A;
 
+// -- Couleur des quatre éléments
+$color-air: #34495e;
+
 // -- Couleur fond de l'application
 $color-bg: #D4D7D2;
+
+// -- Couleur fond des cartes résultat
+$color-card-bg: color.scale($color-bg, $lightness: 35%);
 
 // -- Couleur NOIR et BLANC
 $color-black: #333;
 $color-white: #fff;
 
+// PADDING
 // -- Gouttières
 $gutter: 1.5rem;
 $halfGutter: math.div($gutter, 2);
 
+// POLICES d’ÉCRITURE
 // -- Police d'ATLA
 $font-atla: 'Herculanum', sans-serif;
+
+// -- Police type "machine à écrire"
+$font-title: 'CourierPrime', sans-serif;
+
+// -- Police pour mes labels
+$font-label: 'Heebo', sans-serif;

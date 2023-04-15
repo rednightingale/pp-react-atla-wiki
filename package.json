@@ -52,6 +52,7 @@
     "prop-types": "*",
     "react": "*",
     "react-dom": "*",
-    "react-icomoon": "^2.5.7"
+    "react-icomoon": "^2.5.7",
+    "react-image-webp": "^0.8.0"
   }
 }
