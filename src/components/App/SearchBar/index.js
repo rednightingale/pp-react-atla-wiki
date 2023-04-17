@@ -1,6 +1,6 @@
 // -- Mes imports locaux
 import "./style.scss";
-import Icon from '../../../ui/Icon';
+import { FaSearch } from "react-icons/fa";
 
 // -- Mon composant
 function Searchbar() {
@@ -18,7 +18,7 @@ function Searchbar() {
           <i className="Searchbar-form-input-focus-border-i" />
         </span>
         <button className="Searchbar-form-button" type="submit">
-          <Icon icon="search" size="2rem" />
+          <FaSearch className="Searchbar-form-button-icon" size="2rem" />
         </button>
       </form>
     </div>
