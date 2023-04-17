@@ -11,12 +11,13 @@ function Searchbar() {
           className="Searchbar-form-input"
           type="search"
           name="search"
-          placeholder="Search"
-          aria-label="Search"
+          placeholder="search"
+          aria-label="search"
         />
-        <span className="Searchbar-form-input-focus-border">
-          <i className="Searchbar-form-input-focus-border-i" />
-        </span>
+        <span className="Searchbar-form-input-focus-border" />
+        <span className="Searchbar-form-input-focus-border" />
+        <span className="Searchbar-form-input-focus-border" />
+        <span className="Searchbar-form-input-focus-border" />
         <button className="Searchbar-form-button" type="submit">
           <FaSearch className="Searchbar-form-button-icon" size="2rem" />
         </button>
