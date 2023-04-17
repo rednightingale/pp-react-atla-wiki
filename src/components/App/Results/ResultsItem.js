@@ -1,5 +1,5 @@
 // -- Mes imports extérieurs
-// import Image from 'react-image-webp';
+import { useState, useEffect } from 'react';
 
 // -- Mes imports locaux
 import "./style.scss";
