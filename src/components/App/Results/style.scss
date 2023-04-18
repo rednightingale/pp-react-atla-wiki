@@ -47,34 +47,21 @@
       border: 1px solid v.$color-white;
       border-radius: 2rem;
       -webkit-backface-visibility: hidden;
-      /* Safari */
       backface-visibility: hidden;
 
       &-image {
-        &-container {
-
-          // Sert à construire une bordure qui ne fait pas la taille du parent
-          &:before {
-            content: "";
-            position: absolute;
-            left: 1rem;
-            bottom: 13.5rem;
-            width: 90%;
-            border-bottom: 1.5px solid v.$color-air;
-          }
-        }
-
         &-avatar {
-          width: 100%;
-          max-width: 12.5rem;
-          height: auto;
+          width: 12.5rem;
+          height: 12.5rem;
+          object-fit: cover;
           margin: 0 auto;
         }
 
         &-logo {
-          width: 100%;
-          max-width: 3rem;
+          width: auto;
+          max-width: 2.5rem;
           height: auto;
+          max-height: 2.5rem;
           position: absolute;
           right: .7rem;
           top: .7rem;
@@ -111,13 +98,24 @@
 
         &-container {
           display: flex;
+          justify-content: center;
           // Pour que mon container prenne la totalité de la carte
           flex-grow: 1;
+        }
+
+        &-breakline {
+          position: absolute;
+          left: 1rem;
+          width: 90%;
+          border: 1px solid v.$color-air;
         }
 
         &-name,
         &-nationality,
         &-position {
+          display: flex;
+          justify-content: center;
+          align-items: center;
           flex-grow: 1;
           padding: .3rem;
         }
@@ -125,11 +123,13 @@
         &-name {
           font-family: v.$font-atla;
           font-size: 1.75rem;
+          padding-bottom: 0;
         }
 
         &-nationality {
           font-family: v.$font-atla;
           font-size: 1.25rem;
+          padding-top: 0;
         }
 
         &-position {
@@ -173,13 +173,23 @@
         font-size: 2vh;
         flex-grow: 1;
 
+        &-breakline {
+          position: absolute;
+          left: 1rem;
+          width: 90%;
+          border: 1px solid v.$color-air;
+        }
+
         &-title {
           font-family: v.$font-title;
           text-align: start;
           flex-grow: 1;
 
-          &:first-child {
-            padding-top: .6rem;
+          &-first {
+            font-family: v.$font-title;
+            text-align: start;
+            flex-grow: 1;
+            padding-top: .7rem;
           }
         }
 

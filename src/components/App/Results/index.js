@@ -14,7 +14,6 @@ function Results() {
 
   // Pour récupérer les données de l'API et les afficher
   const [data, setData] = useState([]);
-  console.log("AANG", data[0]?.name);
 
   // Pour instaurer un loading lorsqu'on fait appel à l'API pour le chargement des données
   const [isLoading, toggleIsLoading] = useState(true);
