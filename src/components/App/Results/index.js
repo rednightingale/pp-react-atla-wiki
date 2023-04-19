@@ -3,14 +3,14 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 
 // -- Mes imports locaux
-import ResultsItem from "./ResultsItem";
+import ResultsItem from "./ResultsItem/index";
 import Loader from '../Loader';
 import "./style.scss";
 
 // -- Mon composant
 function Results() {
   // L'adresse racine de mon API
-  let api = `https://api.sampleapis.com/avatar/`;
+  const api = `https://api.sampleapis.com/avatar/`;
 
   // Pour récupérer les données de l'API et les afficher
   const [data, setData] = useState([]);
@@ -33,12 +33,6 @@ function Results() {
     fetchData();
   }, []);
 
-  if (isLoading) {
-    return (
-      <Loader />
-    );
-  }
-
   if (!isLoading) {
     return (
       <div className="Results">
@@ -48,6 +42,7 @@ function Results() {
       </div>
     );
   }
+  return <Loader />;
 }
 
 // -- Mon export

@@ -1,11 +1,12 @@
 /* eslint-disable no-nested-ternary */
 
 // -- Mes imports extérieurs
+import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { FaPlusCircle } from "react-icons/fa";
 
 // -- Mes imports locaux
-import "./style.scss";
+import "../style.scss";
 
 // -- Mon composant
 function ResultsItem({ id, name, bio, chronologicalInformation, politicalInformation }) {
@@ -32,7 +33,7 @@ function ResultsItem({ id, name, bio, chronologicalInformation, politicalInforma
     fetchData();
   }, []);
 
-  // Je déconstruis chronologicalInformation et bio pour plus de facilité
+  // Je déconstruis biot et chronologicalInformation pour plus de facilité
   const { nationality, ethnicity } = bio;
   const { firstAppearance, lastAppearance, voicedBy } = chronologicalInformation;
 
@@ -88,7 +89,9 @@ function ResultsItem({ id, name, bio, chronologicalInformation, politicalInforma
               <h3 className="ResultsItem-flip-card-back-info-title">Voiced by:</h3>
               <p className="ResultsItem-flip-card-back-info-voicedBy">{voicedBy === "NA" ? "Unknown" : voicedBy[0]}</p>
             </aside>
-            <FaPlusCircle className="ResultsItem-flip-card-back-plus" size="1.5rem" />
+            <Link to={`/characters/${name}`} className="ResultsItem-flip-card-back-link">
+              <FaPlusCircle className="ResultsItem-flip-card-back-link-plus" size="1.5rem" />
+            </Link>
           </div>
         </div>
       </article>

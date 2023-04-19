@@ -1,8 +1,8 @@
-// == Import
-import Header from './Header';
-import Menu from './Menu';
-import Searchbar from './SearchBar';
-import Results from './Results';
+// == Imports externes
+import { BrowserRouter as Routes, Route } from 'react-router-dom';
+
+// Imports internes
+import Home from '../../pages/Home';
 
 import './style.scss';
 
@@ -10,13 +10,9 @@ import './style.scss';
 function App() {
   return (
     <div className="app">
-      <Header />
-
-      <Menu />
-
-      <Searchbar />
-
-      <Results />
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
     </div>
   );
 }
