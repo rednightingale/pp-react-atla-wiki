@@ -32,9 +32,64 @@ function Character() {
   }, []);
 
   return (
-    <div className="Character">
-      Character {name} {character.bio?.nationality}
-    </div>
+    <article className="Character">
+      <header>
+        <h1>NOM DU PERSO</h1>
+        <figure>
+          <img
+            className="Character"
+            src={id === 8 ? `/img/Characters/Suki.jpg` : id === 11 ? `/img/Characters/Azula.jpg` : `/img/Characters/${name}.jpg`}
+            alt={`Character of ${name}`}
+          />
+          <figcaption>UNE FIGCAPTION</figcaption>
+        </figure>
+      </header>
+
+      <aside>
+        <h2>Nation</h2>
+        <figure>
+          <img
+            className="Character"
+            // src={}
+            alt={`Flag of ${name}'s nation`}
+          />
+        </figure>
+        <h2>In love with</h2>
+        <figure>
+          <img
+            className="Character"
+            // src={}
+            alt={`${name}'s love interest`}
+          />
+        </figure>
+      </aside>
+
+      <article>
+        <header>Character sheet</header>
+        <h3>alternativeNames</h3>
+        <p>alternativeNames</p>
+        <h3>profession</h3>
+        <p>profession</p>
+        <h3>nationality</h3>
+        <p>nationality</p>
+        <h3>ethnicity</h3>
+        <p>ethnicity</p>
+        <h3>ages</h3>
+        <p>ages</p>
+        <h3>weaponsOfChoice</h3>
+        <p>weaponsOfChoice</p>
+        <h3>fightingStyles</h3>
+        <p>fightingStyles</p>
+      </article>
+
+      <section>
+        <h2>allies</h2>
+      </section>
+
+      <section>
+        <h2>enemies</h2>
+      </section>
+    </article>
   );
 }
 
