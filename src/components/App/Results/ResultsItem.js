@@ -2,6 +2,7 @@
 
 // -- Mes imports extérieurs
 import { useState, useEffect } from 'react';
+import { FaPlusCircle } from "react-icons/fa";
 
 // -- Mes imports locaux
 import "./style.scss";
@@ -11,10 +12,6 @@ function ResultsItem({ id, name, bio, chronologicalInformation, politicalInforma
   // Je récupère les différentes "position" des personnages à travers "politicalInformation"
   // Je ne garde que deux "positions" pour les cartes de présentation de personnage
   const [position, getPosition] = useState([]);
-
-  // const string = `Blabla [3]`;
-  // const stringFiltered = string.replace(`[3]`, "");
-  // console.log(stringFiltered);
 
   useEffect(() => {
     const fetchData = () => {
@@ -35,7 +32,8 @@ function ResultsItem({ id, name, bio, chronologicalInformation, politicalInforma
     fetchData();
   }, []);
 
-  // Je déconstruis chronologicalInformation pour plus de facilité
+  // Je déconstruis chronologicalInformation et bio pour plus de facilité
+  const { nationality, ethnicity } = bio;
   const { firstAppearance, lastAppearance, voicedBy } = chronologicalInformation;
 
   return (
@@ -52,7 +50,7 @@ function ResultsItem({ id, name, bio, chronologicalInformation, politicalInforma
               <div className="ResultsItem-flip-card-front-image-logo-color" />
               <img
                 className="ResultsItem-flip-card-front-image-logo"
-                src={bio.nationality === "Fire Nation" ? `img/Logo/logo-${bio?.nationality}.png` : bio.nationality === "Air Nomad" ? `img/Logo/logo-${bio?.nationality}.png` : bio.nationality === "Earth Kingdom" ? `img/Logo/logo-${bio?.nationality}.png` : `img/Logo/logo-${bio?.ethnicity}.png`}
+                src={nationality === "Fire Nation" ? `img/Logo/logo-${nationality}.png` : nationality === "Air Nomad" ? `img/Logo/logo-${nationality}.png` : nationality === "Earth Kingdom" ? `img/Logo/logo-${nationality}.png` : `img/Logo/logo-${ethnicity}.png`}
                 alt={`Nation logo`}
               />
             </div>
@@ -60,7 +58,7 @@ function ResultsItem({ id, name, bio, chronologicalInformation, politicalInforma
               <header className="ResultsItem-flip-card-front-header">
                 <hr className="ResultsItem-flip-card-front-header-breakline" />
                 <h1 className="ResultsItem-flip-card-front-header-name">{id === 7 ? "Zuko" : id === 8 ? "Suki" : id === 11 ? "Azula" : name}</h1>
-                <h2 className="ResultsItem-flip-card-front-header-nationality">{bio.nationality.length > 33 ? bio.nationality.slice(0, 33) : bio.nationality}</h2>
+                <h2 className="ResultsItem-flip-card-front-header-nationality">{nationality.length > 33 ? nationality.slice(0, 33) : nationality}</h2>
                 {position.map((job) => (
                   <p className="ResultsItem-flip-card-front-header-position" key={job}>{job}</p>
                 ))}
@@ -77,7 +75,7 @@ function ResultsItem({ id, name, bio, chronologicalInformation, politicalInforma
               <div className="ResultsItem-flip-card-back-image-logo-color" />
               <img
                 className="ResultsItem-flip-card-back-image-logo"
-                src={bio.nationality === "Fire Nation" ? `img/Logo/logo-${bio?.nationality}.png` : bio.nationality === "Air Nomad" ? `img/Logo/logo-${bio?.nationality}.png` : bio.nationality === "Earth Kingdom" ? `img/Logo/logo-${bio?.nationality}.png` : `img/Logo/logo-${bio?.ethnicity}.png`}
+                src={nationality === "Fire Nation" ? `img/Logo/logo-${nationality}.png` : nationality === "Air Nomad" ? `img/Logo/logo-${nationality}.png` : nationality === "Earth Kingdom" ? `img/Logo/logo-${nationality}.png` : `img/Logo/logo-${ethnicity}.png`}
                 alt={`Nation logo`}
               />
             </div>
@@ -90,6 +88,7 @@ function ResultsItem({ id, name, bio, chronologicalInformation, politicalInforma
               <h3 className="ResultsItem-flip-card-back-info-title">Voiced by:</h3>
               <p className="ResultsItem-flip-card-back-info-voicedBy">{voicedBy === "NA" ? "Unknown" : voicedBy[0]}</p>
             </aside>
+            <FaPlusCircle className="ResultsItem-flip-card-back-plus" size="1.5rem" />
           </div>
         </div>
       </article>
