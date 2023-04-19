@@ -83,11 +83,11 @@ function ResultsItem({ id, name, bio, chronologicalInformation, politicalInforma
             </div>
             <aside className="ResultsItem-flip-card-back-info">
               <hr className="ResultsItem-flip-card-back-info-breakline" />
-              <h3 className="ResultsItem-flip-card-back-info-title-first">Première apparence :</h3>
+              <h3 className="ResultsItem-flip-card-back-info-title-first">First apparence:</h3>
               <p className="ResultsItem-flip-card-back-info-firstAppearance">{firstAppearance.length === 46 ? firstAppearance.slice(0, 20) : firstAppearance.length < 26 ? firstAppearance : firstAppearance.slice(0, 51)}</p>
-              <h3 className="ResultsItem-flip-card-back-info-title">Dernière apparence :</h3>
+              <h3 className="ResultsItem-flip-card-back-info-title">Last apparence:</h3>
               <p className="ResultsItem-flip-card-back-info-lastAppearance">{lastAppearance === "NA" ? "Unknown" : lastAppearance[0]}</p>
-              <h3 className="ResultsItem-flip-card-back-info-title">Doublé par :</h3>
+              <h3 className="ResultsItem-flip-card-back-info-title">Voiced by:</h3>
               <p className="ResultsItem-flip-card-back-info-voicedBy">{voicedBy === "NA" ? "Unknown" : voicedBy[0]}</p>
             </aside>
           </div>
