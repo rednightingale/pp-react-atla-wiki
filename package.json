@@ -55,6 +55,7 @@
     "react-dom": "*",
     "react-icomoon": "^2.5.7",
     "react-icons": "^4.8.0",
-    "react-image-webp": "^0.8.0"
+    "react-image-webp": "^0.8.0",
+    "react-router-dom": "^6.10.0"
   }
 }
