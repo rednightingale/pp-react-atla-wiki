@@ -17,12 +17,18 @@ function ResultsItem({ id, name, bio, chronologicalInformation, politicalInforma
   useEffect(() => {
     const fetchData = () => {
       try {
+        // Je déconstruis politicalInformation pour plus de facilité
         const { position } = politicalInformation;
+        // Je récupère tous les titres des positions dans le tableau de chaque personnage
         const response = position.map((job) => job);
+
+        // Je ne garde que les deux premières positions de chaque personnage
         // eslint-disable-next-line max-len
         // const filteredResponse = response.filter((item, index, array) => index >= array.length - 2);
         const slicedResponse = response.slice(0, 2);
 
+        // J'enlève tous les caractères [2] et [3] présents par erreur dans les titres de position
+        // de tout mes personnages
         const filteredResponse = slicedResponse?.map((string) => string.replace(`[3]`, "").replace(`[2]`, ""));
         getPosition(filteredResponse);
       }
@@ -33,7 +39,7 @@ function ResultsItem({ id, name, bio, chronologicalInformation, politicalInforma
     fetchData();
   }, []);
 
-  // Je déconstruis biot et chronologicalInformation pour plus de facilité
+  // Je déconstruis bio et chronologicalInformation pour plus de facilité
   const { nationality, ethnicity } = bio;
   const { firstAppearance, lastAppearance, voicedBy } = chronologicalInformation;
 
@@ -89,7 +95,7 @@ function ResultsItem({ id, name, bio, chronologicalInformation, politicalInforma
               <h3 className="ResultsItem-flip-card-back-info-title">Voiced by:</h3>
               <p className="ResultsItem-flip-card-back-info-voicedBy">{voicedBy === "NA" ? "Unknown" : voicedBy[0]}</p>
             </aside>
-            <Link to={`/character/${name}`} className="ResultsItem-flip-card-back-link">
+            <Link to={id === 8 ? `/character/8/Suki` : id === 11 ? `/character/11/Azula` : `/character/${id}/${name}`} className="ResultsItem-flip-card-back-link">
               <FaPlusCircle className="ResultsItem-flip-card-back-link-plus" size="1.5rem" />
             </Link>
           </div>

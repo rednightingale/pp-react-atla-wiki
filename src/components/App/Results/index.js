@@ -12,7 +12,7 @@ function Results() {
   // L'adresse racine de mon API
   const api = `https://api.sampleapis.com/avatar/`;
 
-  // Pour récupérer les données de l'API et les afficher
+  // Pour récupérer les données des personnages de l'API et les afficher
   const [data, setData] = useState([]);
 
   // Pour instaurer un loading lorsqu'on fait appel à l'API pour le chargement des données
