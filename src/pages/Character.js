@@ -2,19 +2,19 @@
 import Header from '../components/App/Header';
 import Menu from '../components/App/Menu';
 import Searchbar from '../components/App/SearchBar';
-import Results from '../components/App/Results';
+import Character from '../components/App/Character';
 
 // -- Mon composant
-function Home() {
+function CharacterInfo() {
   return (
     <>
       <Header />
       <Menu />
       <Searchbar />
-      <Results />
+      <Character />
     </>
   );
 }
 
 // -- Mon export
-export default Home;
+export default CharacterInfo;

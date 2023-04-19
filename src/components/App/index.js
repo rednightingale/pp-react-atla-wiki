@@ -1,8 +1,9 @@
 // == Imports externes
-import { BrowserRouter as Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 // Imports internes
 import Home from '../../pages/Home';
+import CharacterInfo from '../../pages/Character';
 
 import './style.scss';
 
@@ -12,6 +13,7 @@ function App() {
     <div className="app">
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/character/:name" element={<CharacterInfo />} />
       </Routes>
     </div>
   );

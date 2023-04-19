@@ -89,7 +89,7 @@ function ResultsItem({ id, name, bio, chronologicalInformation, politicalInforma
               <h3 className="ResultsItem-flip-card-back-info-title">Voiced by:</h3>
               <p className="ResultsItem-flip-card-back-info-voicedBy">{voicedBy === "NA" ? "Unknown" : voicedBy[0]}</p>
             </aside>
-            <Link to={`/characters/${name}`} className="ResultsItem-flip-card-back-link">
+            <Link to={`/character/${name}`} className="ResultsItem-flip-card-back-link">
               <FaPlusCircle className="ResultsItem-flip-card-back-link-plus" size="1.5rem" />
             </Link>
           </div>
