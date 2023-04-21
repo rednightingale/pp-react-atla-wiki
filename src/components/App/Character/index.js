@@ -1,3 +1,5 @@
+/* eslint-disable no-nested-ternary */
+
 // -- Mes imports locaux
 import axios from 'axios';
 import { useParams } from "react-router-dom";
@@ -33,61 +35,61 @@ function Character() {
 
   return (
     <article className="Character">
-      <header>
-        <h1>NOM DU PERSO</h1>
-        <figure>
+      <header className="Character-header">
+        <h1 className="Character-header-title">NOM DU PERSO</h1>
+        <figure className="Character-header-figure">
           <img
-            className="Character"
+            className="Character-header-figure-picture"
             src={id === 8 ? `/img/Characters/Suki.jpg` : id === 11 ? `/img/Characters/Azula.jpg` : `/img/Characters/${name}.jpg`}
             alt={`Character of ${name}`}
           />
-          <figcaption>UNE FIGCAPTION</figcaption>
+          <figcaption className="Character-header-figure-caption">UNE FIGCAPTION</figcaption>
         </figure>
       </header>
 
-      <aside>
-        <h2>Nation</h2>
-        <figure>
+      <aside className="Character-aside">
+        <h2 className="Character-aside-title">Nation</h2>
+        <figure className="Character-aside-nation">
           <img
-            className="Character"
+            className="Character-aside-nation-picture"
             // src={}
             alt={`Flag of ${name}'s nation`}
           />
         </figure>
-        <h2>In love with</h2>
-        <figure>
+        <h2 className="Character-aside-title">In love with</h2>
+        <figure className="Character-aside-love">
           <img
-            className="Character"
+            className="Character-aside-love-picture"
             // src={}
             alt={`${name}'s love interest`}
           />
         </figure>
       </aside>
 
-      <article>
-        <header>Character sheet</header>
-        <h3>alternativeNames</h3>
-        <p>alternativeNames</p>
-        <h3>profession</h3>
-        <p>profession</p>
-        <h3>nationality</h3>
-        <p>nationality</p>
-        <h3>ethnicity</h3>
-        <p>ethnicity</p>
-        <h3>ages</h3>
-        <p>ages</p>
-        <h3>weaponsOfChoice</h3>
-        <p>weaponsOfChoice</p>
-        <h3>fightingStyles</h3>
-        <p>fightingStyles</p>
+      <article className="Character-info">
+        <header className="Character-info-title">Character sheet</header>
+        <h3 className="Character-info-subtitle">alternativeNames</h3>
+        <p className="Character-info-text">alternativeNames</p>
+        <h3 className="Character-info-subtitle">profession</h3>
+        <p className="Character-info-text">profession</p>
+        <h3 className="Character-info-subtitle">nationality</h3>
+        <p className="Character-info-text">nationality</p>
+        <h3 className="Character-info-subtitle">ethnicity</h3>
+        <p className="Character-info-text">ethnicity</p>
+        <h3 className="Character-info-subtitle">ages</h3>
+        <p className="Character-info-text">ages</p>
+        <h3 className="Character-info-subtitle">weaponsOfChoice</h3>
+        <p className="Character-info-text">weaponsOfChoice</p>
+        <h3 className="Character-info-subtitle">fightingStyles</h3>
+        <p className="Character-info-text">fightingStyles</p>
       </article>
 
-      <section>
-        <h2>allies</h2>
+      <section className="Character-allies">
+        <h2 className="Character-allies-title">allies</h2>
       </section>
 
-      <section>
-        <h2>enemies</h2>
+      <section className="Character-ennemies">
+        <h2 className="Character-ennemies-title">enemies</h2>
       </section>
     </article>
   );
