@@ -1,0 +1,64 @@
+@use '../../../styles/vars' as v;
+
+.Character {
+  display: flex;
+  flex-direction: column;
+
+  &-header {
+    padding-right: 2rem;
+    flex-grow: 1;
+
+    &-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin: 2rem 0;
+    }
+
+    &-title {
+      text-transform: uppercase;
+      font-family: v.$font-atla;
+      font-size: 3rem;
+      border-bottom: 2px solid v.$color-air;
+      width: 30vw; // sert pour que ma border-bottom soit plus grande que mon texte et fasse cette width
+      margin-bottom: 2rem;
+    }
+
+    &-aside {
+      display: flex;
+      flex-direction: column;
+      min-width: 15rem;
+      width: 20%;
+      height: auto;
+
+      &-title {
+        text-transform: uppercase;
+        font-family: v.$font-label;
+        font-weight: 200;
+        font-size: 1rem;
+        padding-top: .3rem;
+      }
+
+      &-figure {
+        &-image {
+          width: 12.5rem;
+          height: 12.5rem;
+          object-fit: cover;
+        }
+      }
+    }
+
+    &-info {
+      &-subtitle {
+        font-family: v.$font-title;
+        padding-top: .6rem;
+      }
+
+      &-text {
+        &:first-letter {
+          text-transform: capitalize;
+        }
+      }
+    }
+  }
+}
