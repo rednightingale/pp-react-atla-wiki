@@ -4,6 +4,7 @@
 import axios from 'axios';
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from 'react';
+import Logo from './logo';
 import "./style.scss";
 
 // -- Mon composant
@@ -16,7 +17,7 @@ function Character() {
 
   // Pour récupérer les données du personnage de l'API et les afficher
   const [character, setCharacter] = useState([]);
-  console.log(character);
+  console.log("1 x CHARACTER", character);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,15 +34,33 @@ function Character() {
     fetchData();
   }, []);
 
-  // Je n'arrive pas à déconstruire mon state "character" => pourquoi ???
-  // Attention !!!!!!
+  // Je n'arrive pas à déconstruire mon state "character" => pourquoi ?????
+  // ATTENTION !!!!!!
   // Je dois toujours vérifier si mes objets sont dans des tableaux ou des strings
-  // Si se sont des tableaux, je peux mapper dessus
+  // Si se sont des tableaux, je peux mapper dessus et je les joints avec une virgule
   // Si se sont des strings, je prend la string telle quelle
   const alternativeNames = Array.isArray(character.bio?.alternativeNames) ? character.bio?.alternativeNames.join(", ") : character.bio?.alternativeNames;
-  const position = Array.isArray(character.politicalInformation?.position) ? character.politicalInformation?.position.join(", ") : character.politicalInformation?.position;
+  const position = Array.isArray(character.politicalInformation?.position) ? character.politicalInformation?.position.join(", ").replace(`[9]`, "") : character.politicalInformation?.position;
   const nationality = Array.isArray(character.bio?.nationality) ? character.bio?.nationality.join(", ") : character.bio?.nationality;
-  const ethnicity = Array.isArray(character.bio?.ethnicity) ? character.bio?.ethnicity.join(", ") : character.bio?.ethnicity;
+  const ethnicity = character.bio?.ethnicity;
+
+  // J'aimerais utiliser "ethnicity" pour afficher le drapeau des personnages dans le ASIDE
+  // Si j'utilise "ethnicity", j'ai un %20 à la place d'un espace qui empêche le logo de s'afficher
+  // J'essaye de l'enlever avec :
+  // const encodedEthnicity = decodeURI(ethnicity);
+  // const encodedEthnicity = ethnicity?.replace(/%20/g, " ");
+  // SAUF QUE : avec useState, j'ai d'abord un undefined et ensuite l'"ethnicity"
+  // Du coup, je vais créer un composant dynamique à part,
+  // mais je pense qu'il y a une autre façon de faire
+
+  // Je souhaite afficher l'image du "love interest" sur les fiches personnages
+  // character.personalInformation?.loveInterest
+  // C'est égale à une string avec les différents noms + statut de la relation
+  // J'aimerais sortir les noms de la string et arriver à afficher leur photo
+  // en associant leur nom au dossier publique d'images
+  const regExp = /Aang|Appa|Azula|Iroh|Katara|Long Feng|Momo|Ozai|Sokka|Suki|Toph Beifong|Zhao|Zuko/gi;
+  const lovers = character.personalInformation?.loveInterest?.match(regExp);
+  console.log("NOMS TROUVES", lovers);
 
   return (
     <article className="Character">
@@ -61,10 +80,16 @@ function Character() {
             <h3 className="Character-header-info-subtitle">Ethnicity</h3>
             <p className="Character-header-info-text">{ethnicity}</p>
             <h3 className="Character-header-info-subtitle">Age</h3>
-            {Array.isArray(character.bio?.ages) ?
-              character.bio?.ages.map((age) =>
-                <p className="Character-header-info-text" key={age}>{age.replace(`[3]`, "").replace(`[4]`, "").replace(`[5]`, "").replace(`[6]`, "")}</p>
-              ) : <p className="Character-header-info-text">{character.bio?.ages}</p>}
+            {Array.isArray(character.bio?.ages)
+              ? character.bio?.ages.map((age) => (
+                <p className="Character-header-info-text" key={age}>{age
+                  .replace(`[3]`, "")
+                  .replace(`[4]`, "")
+                  .replace(`[5]`, "")
+                  .replace(`[6]`, "")
+                  .replace(`[7]`, "")}
+                </p>
+              )) : <p className="Character-header-info-text">{character.bio?.ages}</p>}
             <h3 className="Character-header-info-subtitle">Weapons of choice</h3>
             {Array.isArray(character.personalInformation?.weaponsOfChoice)
               ? character.personalInformation?.weaponsOfChoice.map((weapon) => (
@@ -92,19 +117,26 @@ function Character() {
           </figure>
           <h2 className="Character-header-aside-title">Nation</h2>
           <figure className="Character-header-aside-nation">
-            <img
-              className="Character-header-aside-nation-image"
-              // src={}
-              alt={`Flag of ${name}'s nation`}
-            />
+            <Logo {...character} />
           </figure>
           <h2 className="Character-header-aside-title">In love with</h2>
           <figure className="Character-header-aside-love">
-            <img
-              className="Character-header-aside-love-image"
-              // src={}
-              alt={`${name}'s love interest`}
-            />
+            {lovers?.length > 1
+              ? lovers.map((lover) => (
+                <img
+                  className="Character-header-aside-love-image"
+                  src={`/img/Characters/${lover}.jpg`}
+                  alt={`${name}'s lover`}
+                  key={lover}
+                />
+              ))
+              : (
+                <img
+                  className="Character-header-aside-love-image"
+                  src={`/img/Characters/${lovers}.jpg`}
+                  alt={`${name}'s lover`}
+                />
+              )}
           </figure>
         </aside>
       </div>

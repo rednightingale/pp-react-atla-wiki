@@ -25,8 +25,10 @@ function ResultsItem({
         const response = position.map((job) => job);
 
         // Je ne garde que les deux premières positions de chaque personnage
+        // Cette solution ne me garde que les deux dernières positions
         // eslint-disable-next-line max-len
         // const filteredResponse = response.filter((item, index, array) => index >= array.length - 2);
+        // Je souhaite les deux premières "position"
         const slicedResponse = response.slice(0, 2);
 
         // J'enlève tous les caractères [2] et [3] présents par erreur dans les titres de position
