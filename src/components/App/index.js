@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 // Imports internes
 import Home from '../../pages/Home';
 import CharacterInfo from '../../pages/Character';
+import Error from '../../pages/Error';
 
 import './style.scss';
 
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/character/:id/:name" element={<CharacterInfo />} />
+        <Route path="*" element={<Error />} />
       </Routes>
     </div>
   );

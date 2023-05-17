@@ -1,3 +1,6 @@
+// -- Mes imports extérieurs
+import { Link } from 'react-router-dom';
+
 // -- Mes imports locaux
 import logo from '../../../assets/images/avatar-logo.svg';
 import "./style.scss";
@@ -6,11 +9,13 @@ import "./style.scss";
 function Header() {
   return (
     <div className="Header">
-      <img
-        className="Header-logo"
-        src={logo}
-        alt="Avatar the Last Airbender logo"
-      />
+      <Link to="/">
+        <img
+          className="Header-logo"
+          src={logo}
+          alt="Avatar the Last Airbender logo"
+        />
+      </Link>
     </div>
   );
 }

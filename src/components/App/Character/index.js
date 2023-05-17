@@ -1,11 +1,14 @@
 /* eslint-disable no-nested-ternary */
 
-// -- Mes imports locaux
+// -- Mes imports extérieurs
 import axios from 'axios';
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from 'react';
+
+// -- Mes imports locaux
 import Logo from './logo';
 import "./style.scss";
+import Lover from './lover';
 
 // -- Mon composant
 function Character() {
@@ -61,6 +64,31 @@ function Character() {
   const regExp = /Aang|Appa|Azula|Iroh|Katara|Long Feng|Momo|Ozai|Sokka|Suki|Toph Beifong|Zhao|Zuko/gi;
   const lovers = character.personalInformation?.loveInterest?.match(regExp);
   console.log("NOMS TROUVES", lovers);
+
+  // J'aimerais ajouter des liens vers les fiches personnages sur les images "love interest"
+  // MAIS pour ça, j'ai absolument besoin de l'ID des "love interest" en plus de leur nom
+  // puisque ma route fonctionne comme ceci : character/:id/:name
+  // J'ai besoin pour ça d'avoir accès à toutes mes datas
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${api}characters`);
+        setData(response.data);
+        console.log("DATA", response.data);
+      }
+      catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  // Et de comparer les noms des "love interest" à mes data pour pouvoir récupérer l'ID
+  // Je mets ensuite directement l'information dans mon composant
+  const searchLover = data.find((lover) => lover.name === `${lovers}`);
+  // const findLovers = searchLovers.map((lover) => lover.id);
 
   return (
     <article className="Character">
@@ -123,19 +151,23 @@ function Character() {
           <figure className="Character-header-aside-love">
             {lovers?.length > 1
               ? lovers.map((lover) => (
-                <img
-                  className="Character-header-aside-love-image"
-                  src={`/img/Characters/${lover}.jpg`}
-                  alt={`${name}'s lover`}
-                  key={lover}
-                />
+                <Link to="/">
+                  <img
+                    className="Character-header-aside-love-image"
+                    src={`/img/Characters/${lover}.jpg`}
+                    alt={`${name}'s lover`}
+                    key={lover}
+                  />
+                </Link>
               ))
               : (
-                <img
-                  className="Character-header-aside-love-image"
-                  src={`/img/Characters/${lovers}.jpg`}
-                  alt={`${name}'s lover`}
-                />
+                <Link to={`/character/${searchLover?.id}/${lovers}`}>
+                  <img
+                    className="Character-header-aside-love-image"
+                    src={`/img/Characters/${lovers}.jpg`}
+                    alt={`${name}'s lover`}
+                  />
+                </Link>
               )}
           </figure>
         </aside>
