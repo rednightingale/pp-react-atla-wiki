@@ -8,7 +8,6 @@ import { useState, useEffect } from 'react';
 // -- Mes imports locaux
 import Logo from './logo';
 import "./style.scss";
-import Lover from './lover';
 
 // -- Mon composant
 function Character() {
@@ -35,7 +34,16 @@ function Character() {
       }
     };
     fetchData();
-  }, []);
+  }, [name, id]);
+
+  // J'aimerais utiliser "ethnicity" pour afficher le drapeau des personnages dans le ASIDE
+  // Si j'utilise "ethnicity", j'ai un %20 à la place d'un espace qui empêche le logo de s'afficher
+  // J'essaye de l'enlever avec :
+  // const encodedEthnicity = decodeURI(ethnicity);
+  // const encodedEthnicity = ethnicity?.replace(/%20/g, " ");
+  // SAUF QUE : avec useState, j'ai d'abord un undefined et ensuite l'"ethnicity"
+  // Du coup, je vais créer un composant dynamique à part,
+  // mais je pense qu'il y a une autre façon de faire
 
   // Je n'arrive pas à déconstruire mon state "character" => pourquoi ?????
   // ATTENTION !!!!!!
@@ -47,48 +55,50 @@ function Character() {
   const nationality = Array.isArray(character.bio?.nationality) ? character.bio?.nationality.join(", ") : character.bio?.nationality;
   const ethnicity = character.bio?.ethnicity;
 
-  // J'aimerais utiliser "ethnicity" pour afficher le drapeau des personnages dans le ASIDE
-  // Si j'utilise "ethnicity", j'ai un %20 à la place d'un espace qui empêche le logo de s'afficher
-  // J'essaye de l'enlever avec :
-  // const encodedEthnicity = decodeURI(ethnicity);
-  // const encodedEthnicity = ethnicity?.replace(/%20/g, " ");
-  // SAUF QUE : avec useState, j'ai d'abord un undefined et ensuite l'"ethnicity"
-  // Du coup, je vais créer un composant dynamique à part,
-  // mais je pense qu'il y a une autre façon de faire
-
-  // Je souhaite afficher l'image du "love interest" sur les fiches personnages
-  // character.personalInformation?.loveInterest
-  // C'est égale à une string avec les différents noms + statut de la relation
-  // J'aimerais sortir les noms de la string et arriver à afficher leur photo
-  // en associant leur nom au dossier publique d'images
-  const regExp = /Aang|Appa|Azula|Iroh|Katara|Long Feng|Momo|Ozai|Sokka|Suki|Toph Beifong|Zhao|Zuko/gi;
-  const lovers = character.personalInformation?.loveInterest?.match(regExp);
-  console.log("NOMS TROUVES", lovers);
-
-  // J'aimerais ajouter des liens vers les fiches personnages sur les images "love interest"
+  // J'aimerais aussi ajouter des liens vers les fiches personnages sur les images "love interest"
   // MAIS pour ça, j'ai absolument besoin de l'ID des "love interest" en plus de leur nom
   // puisque ma route fonctionne comme ceci : character/:id/:name
-  // J'ai besoin pour ça d'avoir accès à toutes mes datas
-  const [data, setData] = useState([]);
+  // J'ai besoin pour ça d'avoir aussi accès à toutes mes datas
+  const [loversName, setLoversName] = useState([]);
+  const [lovers, setLovers] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${api}characters`);
-        setData(response.data);
-        console.log("DATA", response.data);
+        // Je récupère les infos du personnage en fonction de l'ID utilisé dans les paramètres
+        const response1 = await axios.get(`${api}characters/${id}`);
+        const chara = response1.data;
+        // Je récupère toutes les infos de mes personnages
+        const response2 = await axios.get(`${api}characters`);
+        const allChara = response2.data;
+
+        // Je souhaite afficher l'image du "love interest" sur les fiches personnages
+        // character.personalInformation?.loveInterest
+        // C'est égale à une string avec les différents noms + statut de la relation
+        // J'aimerais sortir les noms de la string et arriver à afficher leur photo
+        // en associant leur nom au dossier publique d'images
+        const regExp = /Aang|Appa|Azula|Iroh|Katara|Long Feng|Momo|Ozai|Sokka|Suki|Toph Beifong|Zhao|Zuko/gi;
+        const loversArr = chara.personalInformation?.loveInterest?.match(regExp);
+
+        setLoversName(loversArr);
+        setLovers(allChara);
       }
       catch (error) {
         console.log(error);
       }
     };
     fetchData();
-  }, []);
+  }, [name, id]);
 
-  // Et de comparer les noms des "love interest" à mes data pour pouvoir récupérer l'ID
-  // Je mets ensuite directement l'information dans mon composant
-  const searchLover = data.find((lover) => lover.name === `${lovers}`);
-  // const findLovers = searchLovers.map((lover) => lover.id);
+  // La récupération de l'ID directement dans mon map plus bas ne fonctionne pas, j'ai "undefined" :
+  // ${lovers?.filter((item) => item.name === `${element}`)?.id}
+  // Je crée donc une fonction en dehors
+  // pour pouvoir récupérer les IDs de chaque noms mappés (enfin !!!!)
+  function getId(item) {
+    const findName = lovers?.find((element) => element.name === item);
+    const findId = findName?.id;
+    return findId;
+  }
 
   return (
     <article className="Character">
@@ -149,26 +159,18 @@ function Character() {
           </figure>
           <h2 className="Character-header-aside-title">In love with</h2>
           <figure className="Character-header-aside-love">
-            {lovers?.length > 1
-              ? lovers.map((lover) => (
-                <Link to="/">
-                  <img
-                    className="Character-header-aside-love-image"
-                    src={`/img/Characters/${lover}.jpg`}
-                    alt={`${name}'s lover`}
-                    key={lover}
-                  />
-                </Link>
-              ))
-              : (
-                <Link to={`/character/${searchLover?.id}/${lovers}`}>
-                  <img
-                    className="Character-header-aside-love-image"
-                    src={`/img/Characters/${lovers}.jpg`}
-                    alt={`${name}'s lover`}
-                  />
-                </Link>
-              )}
+            {loversName?.map((element) => (
+              <Link
+                to={element === "Zuko" ? `/character/7/${element}` : element === "Suki" ? `/character/8/${element}` : `/character/${getId(element)}/${element}`}
+                key={element}
+              >
+                <img
+                  className="Character-header-aside-love-image"
+                  src={`/img/Characters/${element}.jpg`}
+                  alt={element}
+                />
+              </Link>
+            ))}
           </figure>
         </aside>
       </div>
