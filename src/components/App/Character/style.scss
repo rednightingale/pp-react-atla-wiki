@@ -33,8 +33,8 @@
 
       &-title {
         text-transform: uppercase;
-        font-family: v.$font-label;
-        font-weight: 200;
+        font-family: v.$font-title;
+        font-weight: 500;
         font-size: 1rem;
         padding-top: .3rem;
       }
@@ -55,9 +55,12 @@
         }
       }
 
-      &-love {
+      &-love,
+      &-allies,
+      &-enemies {
         display: flex;
         flex-direction: row;
+        flex-wrap: wrap;
 
         &-image {
           width: 2.5rem;

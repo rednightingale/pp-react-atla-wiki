@@ -21,13 +21,55 @@ function Character() {
   const [character, setCharacter] = useState([]);
   console.log("1 x CHARACTER", character);
 
+  // J'aimerais aussi ajouter des liens vers les fiches personnages sur les images "love interest"
+  // MAIS pour ça, j'ai absolument besoin de l'ID des "love interest" en plus de leur nom
+  // puisque ma route fonctionne comme ceci : character/:id/:name
+  // J'ai besoin pour ça d'avoir aussi accès à toutes mes datas
+  const [loversName, setLoversName] = useState([]);
+  const [alliesName, setAlliesName] = useState([]);
+  const [enemiesName, setEnemiesName] = useState([]);
+  const [data, setData] = useState([]);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         // Je récupère les infos du personnage en fonction de l'ID utilisé dans les paramètres
         const response = await axios.get(`${api}characters/${id}`);
-        // J'ajoute les infos du personnage dans mon state
-        setCharacter(response.data);
+        const myCharacter = response.data;
+
+        // Je récupère toutes les infos de mes personnages
+        const response2 = await axios.get(`${api}characters`);
+        const allCharacters = response2.data;
+
+        // Je souhaite afficher l'image du "love interest" sur les fiches personnages
+        // character.personalInformation?.loveInterest
+        // C'est égale à une string avec les différents noms + statut de la relation
+        // J'aimerais sortir les noms de la string et arriver à afficher leur photo
+        // en associant leur nom au dossier publique d'images
+        const regExp = /Aang|Appa|Azula|Iroh|Katara|Long Feng|Momo|Ozai|Sokka|Suki|Toph Beifong|Zhao|Zuko/gi;
+        const loversArr = myCharacter.personalInformation?.loveInterest?.match(regExp);
+        console.log(loversArr);
+
+        // Je reprends le même schéma pour afficher les alliées et les enemies
+        // Ici, je suis obligée de passer par un filter car l'information est sous forme
+        // de tableau et non de string
+        // eslint-disable-next-line max-len
+        const alliesArr = myCharacter.personalInformation?.allies?.filter((allies) => allies.match(regExp));
+        const alliesArrFilter = alliesArr?.map((allies) => allies.replace(` (formerly)`, "").replace(`General `, ""));
+
+        // eslint-disable-next-line max-len
+        const enemiesArr = myCharacter.personalInformation?.enemies?.filter((enemies) => enemies.match(regExp));
+        const enemiesArrFilter = enemiesArr?.map((enemies) => enemies.replace(` (formerly)`, "").replace(`General `, ""));
+
+        console.log("ALLIES ARRAY", alliesArrFilter);
+        console.log("ENEMIES ARRAY", enemiesArrFilter);
+
+        // J'ajoute les différentes infos du personnage dans mes différents states
+        setCharacter(myCharacter);
+        setData(allCharacters);
+        setLoversName(loversArr);
+        setAlliesName(alliesArrFilter);
+        setEnemiesName(enemiesArrFilter);
       }
       catch (error) {
         console.log(error);
@@ -35,6 +77,16 @@ function Character() {
     };
     fetchData();
   }, [name, id]);
+
+  // La récupération de l'ID directement dans mon map plus bas ne fonctionne pas, j'ai "undefined" :
+  // ${lovers?.filter((item) => item.name === `${element}`)?.id}
+  // Je crée donc une fonction en dehors
+  // pour pouvoir récupérer les IDs de chaque noms mappés (enfin !!!!)
+  function getId(item) {
+    const findName = data?.find((element) => element.name === item);
+    const findId = findName?.id;
+    return findId;
+  }
 
   // J'aimerais utiliser "ethnicity" pour afficher le drapeau des personnages dans le ASIDE
   // Si j'utilise "ethnicity", j'ai un %20 à la place d'un espace qui empêche le logo de s'afficher
@@ -55,57 +107,12 @@ function Character() {
   const nationality = Array.isArray(character.bio?.nationality) ? character.bio?.nationality.join(", ") : character.bio?.nationality;
   const ethnicity = character.bio?.ethnicity;
 
-  // J'aimerais aussi ajouter des liens vers les fiches personnages sur les images "love interest"
-  // MAIS pour ça, j'ai absolument besoin de l'ID des "love interest" en plus de leur nom
-  // puisque ma route fonctionne comme ceci : character/:id/:name
-  // J'ai besoin pour ça d'avoir aussi accès à toutes mes datas
-  const [loversName, setLoversName] = useState([]);
-  const [lovers, setLovers] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // Je récupère les infos du personnage en fonction de l'ID utilisé dans les paramètres
-        const response1 = await axios.get(`${api}characters/${id}`);
-        const chara = response1.data;
-        // Je récupère toutes les infos de mes personnages
-        const response2 = await axios.get(`${api}characters`);
-        const allChara = response2.data;
-
-        // Je souhaite afficher l'image du "love interest" sur les fiches personnages
-        // character.personalInformation?.loveInterest
-        // C'est égale à une string avec les différents noms + statut de la relation
-        // J'aimerais sortir les noms de la string et arriver à afficher leur photo
-        // en associant leur nom au dossier publique d'images
-        const regExp = /Aang|Appa|Azula|Iroh|Katara|Long Feng|Momo|Ozai|Sokka|Suki|Toph Beifong|Zhao|Zuko/gi;
-        const loversArr = chara.personalInformation?.loveInterest?.match(regExp);
-
-        setLoversName(loversArr);
-        setLovers(allChara);
-      }
-      catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, [name, id]);
-
-  // La récupération de l'ID directement dans mon map plus bas ne fonctionne pas, j'ai "undefined" :
-  // ${lovers?.filter((item) => item.name === `${element}`)?.id}
-  // Je crée donc une fonction en dehors
-  // pour pouvoir récupérer les IDs de chaque noms mappés (enfin !!!!)
-  function getId(item) {
-    const findName = lovers?.find((element) => element.name === item);
-    const findId = findName?.id;
-    return findId;
-  }
-
   return (
     <article className="Character">
       <div className="Character-header-container">
         <header className="Character-header">
 
-          <h1 className="Character-header-title">{name}</h1>
+          <h1 className="Character-header-title">{name === "蘇科 [3]" ? "Zuko" : name}</h1>
 
           <article className="Character-header-info">
             {/* <header className="Character-header-info-title">Character sheet</header> */}
@@ -155,13 +162,47 @@ function Character() {
           </figure>
           <h2 className="Character-header-aside-title">Nation</h2>
           <figure className="Character-header-aside-nation">
-            <Logo {...character} />
+            <img
+              className="Character-header-aside-nation-image"
+              src={nationality === "Fire Nation" ? `img/Logo/logo-${nationality}.png` : nationality === "Air Nomad" ? `img/Logo/logo-${nationality}.png` : nationality === "Earth Kingdom" ? `img/Logo/logo-${nationality}.png` : `img/Logo/logo-${ethnicity}.png`}
+              alt="Nation logo"
+            />
           </figure>
           <h2 className="Character-header-aside-title">In love with</h2>
           <figure className="Character-header-aside-love">
             {loversName?.map((element) => (
               <Link
-                to={element === "Zuko" ? `/character/7/${element}` : element === "Suki" ? `/character/8/${element}` : `/character/${getId(element)}/${element}`}
+                to={element === "Zuko" ? `/character/7/${element}` : element === "Suki" ? `/character/8/${element}` : element === "Azula" ? `/character/11/${element}` : `/character/${getId(element)}/${element}`}
+                key={element}
+              >
+                <img
+                  className="Character-header-aside-love-image"
+                  src={`/img/Characters/${element}.jpg`}
+                  alt={element}
+                />
+              </Link>
+            ))}
+          </figure>
+          <h2 className="Character-header-aside-title">Allies</h2>
+          <figure className="Character-header-aside-allies">
+            {alliesName?.map((element) => (
+              <Link
+                to={element === "Zuko" ? `/character/7/${element}` : element === "Suki" ? `/character/8/${element}` : element === "Azula" ? `/character/11/${element}` : `/character/${getId(element)}/${element}`}
+                key={element}
+              >
+                <img
+                  className="Character-header-aside-love-image"
+                  src={`/img/Characters/${element}.jpg`}
+                  alt={element}
+                />
+              </Link>
+            ))}
+          </figure>
+          <h2 className="Character-header-aside-title">Enemies</h2>
+          <figure className="Character-header-aside-enemies">
+            {enemiesName?.map((element) => (
+              <Link
+                to={element === "Zuko" ? `/character/7/${element}` : element === "Suki" ? `/character/8/${element}` : element === "Azula" ? `/character/11/${element}` : `/character/${getId(element)}/${element}`}
                 key={element}
               >
                 <img
@@ -173,16 +214,6 @@ function Character() {
             ))}
           </figure>
         </aside>
-      </div>
-
-      <div className="Character-carousel-container">
-        <section className="Character-carousel-allies">
-          <h2 className="Character-carousel-allies-title">allies</h2>
-        </section>
-
-        <section className="Character-carousel-ennemies">
-          <h2 className="Character-carousel-ennemies-title">enemies</h2>
-        </section>
       </div>
     </article>
   );
