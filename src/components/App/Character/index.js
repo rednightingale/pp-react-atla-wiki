@@ -106,6 +106,9 @@ function Character() {
   const position = Array.isArray(character.politicalInformation?.position) ? character.politicalInformation?.position.join(", ").replace(`[9]`, "") : character.politicalInformation?.position;
   const nationality = Array.isArray(character.bio?.nationality) ? character.bio?.nationality.join(", ") : character.bio?.nationality;
   const ethnicity = character.bio?.ethnicity;
+  const ages = character.bio?.ages;
+  const weapons = character.personalInformation?.weaponsOfChoice;
+  const fightingStyles = character.personalInformation?.fightingStyles;
 
   return (
     <article className="Character">
@@ -125,8 +128,8 @@ function Character() {
             <h3 className="Character-header-info-subtitle">Ethnicity</h3>
             <p className="Character-header-info-text">{ethnicity}</p>
             <h3 className="Character-header-info-subtitle">Age</h3>
-            {Array.isArray(character.bio?.ages)
-              ? character.bio?.ages.map((age) => (
+            {Array.isArray(ages)
+              ? ages.map((age) => (
                 <p className="Character-header-info-text" key={age}>{age
                   .replace(`[3]`, "")
                   .replace(`[4]`, "")
@@ -134,19 +137,19 @@ function Character() {
                   .replace(`[6]`, "")
                   .replace(`[7]`, "")}
                 </p>
-              )) : <p className="Character-header-info-text">{character.bio?.ages}</p>}
+              )) : <p className="Character-header-info-text">{ages}</p>}
             <h3 className="Character-header-info-subtitle">Weapons of choice</h3>
-            {Array.isArray(character.personalInformation?.weaponsOfChoice)
-              ? character.personalInformation?.weaponsOfChoice.map((weapon) => (
+            {Array.isArray(weapons)
+              ? weapons.map((weapon) => (
                 <p className="Character-header-info-text" key={weapon}>{weapon}</p>
               ))
-              : <p className="Character-header-info-text">{character.personalInformation?.weaponsOfChoice}</p>}
+              : <p className="Character-header-info-text">{weapons}</p>}
             <h3 className="Character-header-info-subtitle">Fighting styles</h3>
-            {Array.isArray(character.personalInformation?.fightingStyles)
-              ? character.personalInformation?.fightingStyles.map((item) => (
+            {Array.isArray(fightingStyles)
+              ? fightingStyles.map((item) => (
                 <p className="Character-header-info-text" key={item}>{item}</p>
               ))
-              : <p className="Character-header-info-text">{character.personalInformation?.fightingStyles}</p>}
+              : <p className="Character-header-info-text">{fightingStyles}</p>}
           </article>
 
         </header>
@@ -162,11 +165,7 @@ function Character() {
           </figure>
           <h2 className="Character-header-aside-title">Nation</h2>
           <figure className="Character-header-aside-nation">
-            <img
-              className="Character-header-aside-nation-image"
-              src={nationality === "Fire Nation" ? `img/Logo/logo-${nationality}.png` : nationality === "Air Nomad" ? `img/Logo/logo-${nationality}.png` : nationality === "Earth Kingdom" ? `img/Logo/logo-${nationality}.png` : `img/Logo/logo-${ethnicity}.png`}
-              alt="Nation logo"
-            />
+            <Logo {...character} />
           </figure>
           <h2 className="Character-header-aside-title">In love with</h2>
           <figure className="Character-header-aside-love">

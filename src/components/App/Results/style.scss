@@ -73,11 +73,28 @@
             width: 6.7rem;
             height: 6.7rem;
             border-radius: 0 2rem 0 0;
-            background-color: v.$color-air;
             clip-path: polygon(100% 0%, 100% 100%, 0% 0%);
             -webkit-clip-path: polygon(100% 0%, 100% 100%, 0% 0%);
             top: 0;
             right: 0;
+          }
+
+          &-color {
+            &--fire::before {
+              background-color: v.$color-fire;
+            }
+
+            &--air::before {
+              background-color: v.$color-air;
+            }
+
+            &--earth::before {
+              background-color: v.$color-earth;
+            }
+
+            &--water::before {
+              background-color: v.$color-water;
+            }
           }
         }
       }
@@ -107,7 +124,7 @@
           position: absolute;
           left: 1rem;
           width: 90%;
-          border: 1px solid v.$color-air;
+          border: 1px solid;
         }
 
         &-name,
@@ -138,7 +155,6 @@
           font-weight: 500;
           letter-spacing: 0.025rem;
           text-transform: uppercase;
-          color: v.$color-air;
           background-color: v.$color-card-bg;
           border-radius: 1.25rem;
           -webkit-border-radius: 1.25rem;
@@ -146,7 +162,6 @@
           padding: 0.35rem 0.75rem;
           border-style: solid;
           border-width: 0.125rem;
-          border-color: v.$color-air;
           margin: .3rem;
           -webkit-box-shadow: none;
           -moz-box-shadow: none;
@@ -177,7 +192,7 @@
           position: absolute;
           left: 1rem;
           width: 90%;
-          border: 1px solid v.$color-air;
+          border: 1px solid;
         }
 
         &-title {
@@ -208,7 +223,22 @@
           position: absolute;
           right: .5rem;
           bottom: .5rem;
-          color: v.$color-air;
+
+          &--fire {
+            color: v.$color-fire;
+          }
+
+          &--air {
+            color: v.$color-air;
+          }
+
+          &--earth {
+            color: v.$color-earth;
+          }
+
+          &--water {
+            color: v.$color-water;
+          }
         }
       }
     }
