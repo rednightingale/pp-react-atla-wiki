@@ -36,8 +36,10 @@ function Results() {
   if (!isLoading) {
     return (
       <div className="Results">
-        {data.map((item) => (
-          <ResultsItem key={item.id} {...item} />
+        {data.flatMap((item) => (
+          item.name === "Any_Cath"
+            ? []
+            : <ResultsItem key={item.id} {...item} />
         ))}
       </div>
     );
