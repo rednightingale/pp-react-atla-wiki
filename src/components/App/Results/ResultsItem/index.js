@@ -24,7 +24,7 @@ function ResultsItem({
         // Je déconstruis politicalInformation pour plus de facilité
         const { position } = politicalInformation;
         // Je récupère tous les titres des positions dans le tableau de chaque personnage
-        const response = position.map((job) => job);
+        const response = position?.map((job) => job);
 
         // Je ne garde que les deux premières positions de chaque personnage
         // Cette solution ne me garde que les deux dernières positions
