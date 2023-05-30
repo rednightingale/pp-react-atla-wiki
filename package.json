@@ -50,7 +50,7 @@
   },
   "dependencies": {
     "axios": "^1.3.5",
-    "prop-types": "*",
+    "prop-types": "^15.8.1",
     "react": "*",
     "react-dom": "*",
     "react-icomoon": "^2.5.7",

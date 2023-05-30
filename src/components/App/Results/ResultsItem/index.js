@@ -1,6 +1,8 @@
+/* eslint-disable react/require-default-props */
 /* eslint-disable no-nested-ternary */
 
 // -- Mes imports extérieurs
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { FaPlusCircle } from "react-icons/fa";
@@ -150,6 +152,15 @@ function ResultsItem({
     </div>
   );
 }
+
+// -- Mes validations de types avec PropTypes
+ResultsItem.propTypes = {
+  id: PropTypes.number,
+  name: PropTypes.string,
+  bio: PropTypes.object,
+  chronologicalInformation: PropTypes.object,
+  politicalInformation: PropTypes.object,
+};
 
 // -- Mon export
 export default ResultsItem;
