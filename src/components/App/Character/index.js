@@ -15,7 +15,8 @@ function Character() {
   const { id, name } = useParams();
 
   // L'adresse racine de mon API
-  const api = `https://api.sampleapis.com/avatar/`;
+  const MY_API = process.env.REACT_APP_ROOT_API;
+  const api = `${MY_API}`;
 
   // Pour récupérer les données du personnage de l'API et les afficher
   const [character, setCharacter] = useState([]);

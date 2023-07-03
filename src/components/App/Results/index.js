@@ -10,7 +10,8 @@ import "./style.scss";
 // -- Mon composant
 function Results() {
   // L'adresse racine de mon API
-  const api = `https://api.sampleapis.com/avatar/`;
+  const MY_API = process.env.REACT_APP_ROOT_API;
+  const api = `${MY_API}`;
 
   // Pour récupérer les données des personnages de l'API et les afficher
   const [data, setData] = useState([]);
