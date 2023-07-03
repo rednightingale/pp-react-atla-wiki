@@ -1,6 +1,6 @@
-<h1 align="center">MON PROJET ATLA</h1>
+<h1 align="center">MON PROJET AVATAR THE LAST AIRBENDER</h1>
 
-- 🔭 Je travaille actuellement sur un projet front sur l'animé [Avatar le dernier maître de l'air](https://github.com/rednightingale/pp-react-atla-wiki).
+- 🔭 Je travaille actuellement sur un projet FRONT sur l'animé [Avatar le dernier maître de l'air](https://github.com/rednightingale/pp-react-atla-wiki).
 
 - 🌱 Je souhaite améliorer ma maîtrise du **React.**
 
@@ -8,7 +8,7 @@
 
 Je souhaite améliorer ma compréhension du REACT avec un projet simple mais sympa sur l'univers d'Avatar le dernier maître de l'air en créant un site à la WIKI.
 
-J'ai choisi de ne pas faire appel à de bibliothèque pour pratiquer ma logique et ma compréhension de certains composants, comme la création d'un caroussel ou d'une carte recto-verso.
+J'ai choisi de ne pas faire appel à de bibliothèque pour pratiquer ma logique et ma compréhension de certains composants, comme la création d'un carousel ou d'une carte recto-verso.
 
 ## Ce que je souhaite pratiquer dans ce projet
 
@@ -22,13 +22,27 @@ J'ai choisi de ne pas faire appel à de bibliothèque pour pratiquer ma logique 
 
 ## Mes difficultés
 
-- Si j'ai crée ce projet, c'est avant tout car j'avais des soucis d'appel API avec React.
+- Si j'ai crée ce projet, c'est avant tout car j'avais des soucis d'appel API avec React sur mes anciens projets.
 
-[En construction]
+- Faisant appel à une API public, j'ai aussi eu quelques difficultés à m'adapter à la logique de la personne ayant fait l'API pour le manipuler côté FRONT.
+  
+Par exemple :
+  
+- La valeur d'une même propriété d'objet est soit en STRING soit en TABLEAU selon les différents personnages.
+
+- Pour la gestion des liens entre personnages, le développeur a inséré tous les noms en une seule STRING et non en TABLEAU.
+
+- Mélangé à d'autres petits bogues de l'API : certains noms de personnages sont en chinois, ou inexistant, certaines IDs de personnages sont manquantes. Les URLs des photos de profil n'étaient plus d'actualité. Certains caractères (par exemple [2] et [3]) étaient glissés dans beaucoup de valeurs de différentes propriétés. Le développeur s'est emmêlé les pinceaux avec ses clés "ethnicity" et "nationality" qui n'affichent pas les mêmes informations selon les personnages.
+
+🌱 Ces petits choses m'ont permis de pratiquer un peu de logique pour manipuler et afficher toutes les informations que je souhaitais sur le site.
 
 ## Merci à
 
-J'ai choisi de me concenter sur le front, et me base entièrement sur une API libre de droit concernant l'univers d'[Avatar](https://sampleapis.com/api-list/avatar).
+J'ai choisi de me concentrer sur le front, et me base entièrement sur une API libre de droit concernant l'univers d'[Avatar](https://sampleapis.com/api-list/avatar).
+
+[**MAJ de juillet 2023**] Après avoir travaillé avec l'API public sur ce projet, celle-ci n'est plus disponible, le serveur étant fermé.
+
+J'ai donc pris la décision de créer une API pour pouvoir finir ce projet. Le projet FRONT est donc pour l'instant en pause, le temps de créer une API viable pour les informations que je souhaite afficher sur mon projet.
 
 ## Langues et outils
 
